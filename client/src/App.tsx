@@ -1,10 +1,8 @@
 import { useState } from "react";
+import Counter from "./components/counter"
+import NameInput from "./components/NameInput";
 
 export default function App() {
-  // State for name
-  const [name, setName] = useState("");
-  // State for counter
-  const [count, setCount] = useState(0);
   // State for a "dark mode" toggle
   const [darkMode, setDarkMode] = useState(false);
 
@@ -16,38 +14,13 @@ export default function App() {
     >
       <h1 className="text-3xl font-bold mb-4">React Practice Playground</h1>
 
-      {/* Name input */}
-      <div className="mb-6">
-        <label className="block mb-2 font-medium">Your name:</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Type your name..."
-          className="border rounded p-2 text-black"
-        />
-        {name && <p className="mt-2">Hello, {name}! 👋</p>}
-      </div>
+      {/*COUNTER*/}
+      <Counter />
 
-      {/* Counter */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold">Counter</h2>
-        <p className="mb-2">Current value: {count}</p>
-        <div className="flex gap-2">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-green-500 px-3 py-1 rounded"
-          >
-            Increase
-          </button>
-          <button
-            onClick={() => setCount(count - 1)}
-            className="bg-red-500 px-3 py-1 rounded"
-          >
-            Decrease
-          </button>
-        </div>
-      </div>
+      {/* Name input */}
+      <NameInput />
+
+
 
       {/* Dark mode toggle */}
       <div>
