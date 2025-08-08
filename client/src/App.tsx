@@ -1,36 +1,64 @@
-import { Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home.tsx";
-import Cases from "./pages/Cases";
-import Login from "./pages/Login";
+import { useState } from "react";
 
 export default function App() {
+  // State for name
+  const [name, setName] = useState("");
+  // State for counter
+  const [count, setCount] = useState(0);
+  // State for a "dark mode" toggle
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      <header className="bg-blue-600 text-white p-4">
-        <div className="max-w-6xl mx-auto flex justify-between">
-          <h1 className="font-bold">Incident & Evidence System</h1>
-          <nav className="flex gap-4">
-            <Link to="/" className="hover:underline">Home</Link>
-            <Link to="/cases" className="hover:underline">Cases</Link>
-            <Link to="/login" className="hover:underline">Login</Link>
-          </nav>
+    <div
+      className={`min-h-screen p-8 transition-colors ${
+        darkMode ? "bg-gray-900 text-white" : "bg-white text-black"
+      }`}
+    >
+      <h1 className="text-3xl font-bold mb-4">React Practice Playground</h1>
+
+      {/* Name input */}
+      <div className="mb-6">
+        <label className="block mb-2 font-medium">Your name:</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Type your name..."
+          className="border rounded p-2 text-black"
+        />
+        {name && <p className="mt-2">Hello, {name}! 👋</p>}
+      </div>
+
+      {/* Counter */}
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold">Counter</h2>
+        <p className="mb-2">Current value: {count}</p>
+        <div className="flex gap-2">
+          <button
+            onClick={() => setCount(count + 1)}
+            className="bg-green-500 px-3 py-1 rounded"
+          >
+            Increase
+          </button>
+          <button
+            onClick={() => setCount(count - 1)}
+            className="bg-red-500 px-3 py-1 rounded"
+          >
+            Decrease
+          </button>
         </div>
-      </header>
+      </div>
 
-      {/* Main content */}
-      <main className="flex-1 max-w-6xl mx-auto w-full p-4">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cases" element={<Cases />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-gray-100 p-4 text-center text-sm text-gray-500">
-        © {new Date().getFullYear()} Incident & Evidence System
-      </footer>
+      {/* Dark mode toggle */}
+      <div>
+        <h2 className="text-xl font-semibold mb-2">Dark Mode</h2>
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className="bg-blue-500 px-4 py-2 rounded"
+        >
+          {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        </button>
+      </div>
     </div>
   );
 }
