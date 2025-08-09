@@ -23,15 +23,22 @@ export default function NameInput({ value, onChange }: NameInputProps) {
         <button
           type="button"
           onClick={() => onChange("")}
-          className="px-3 py-2 border rounded bg-black-200 hover:bg-gray-300"
+          className="px-3 py-2 border rounded bg-black-200 hover:bg-gray-300 hover:text-black"
         >
           Reset
+        </button>
+        <button
+        type="button"
+          onClick={() => onChange(value.toUpperCase())}
+          className="px-3 py-2 border rounded bg-black-200 hover:bg-gray-300 hover:text-black"
+        >
+          Capitalise
         </button>
       </div>
     
     
       {/* New: character count + greeting */}
-      <CharacterCount text={value} max={20} />
+      <CharacterCount text={value} max={10} />
       <Greeting name={value} />
     </div>
   );

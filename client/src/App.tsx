@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Counter from "./components/counter"
 import NameInput from "./components/NameInput";
+import TodoList from "./components/ToDoList";
 
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
 
       {/* Name input */}
       <NameInput value = {name} onChange={setName}/>
-
+      <TodoList/>
 
       {/* Dark mode toggle */}
       <div>
