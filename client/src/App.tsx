@@ -2,6 +2,7 @@ import { useState } from "react";
 import Counter from "./components/counter"
 import NameInput from "./components/NameInput";
 
+
 export default function App() {
   // State for a "dark mode" toggle
   const [darkMode, setDarkMode] = useState(false);
@@ -20,7 +21,6 @@ export default function App() {
 
       {/* Name input */}
       <NameInput value = {name} onChange={setName}/>
-
 
 
       {/* Dark mode toggle */}

@@ -1,3 +1,6 @@
+import Greeting from "./Greetings"
+import CharacterCount from "./CharacterCount"
+
 type NameInputProps = {
   value: string;
   onChange: (val: string) => void;
@@ -20,13 +23,16 @@ export default function NameInput({ value, onChange }: NameInputProps) {
         <button
           type="button"
           onClick={() => onChange("")}
-          className="px-3 py-2 border rounded bg-gray-200 hover:bg-gray-300"
+          className="px-3 py-2 border rounded bg-black-200 hover:bg-gray-300"
         >
           Reset
         </button>
       </div>
-
-      {value && <p className="mt-2">Hello, {value}! 👋</p>}
+    
+    
+      {/* New: character count + greeting */}
+      <CharacterCount text={value} max={20} />
+      <Greeting name={value} />
     </div>
   );
 }
