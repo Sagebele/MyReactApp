@@ -5,6 +5,7 @@ import NameInput from "./components/NameInput";
 export default function App() {
   // State for a "dark mode" toggle
   const [darkMode, setDarkMode] = useState(false);
+  const [name, setName] = useState("")
 
   return (
     <div
@@ -18,7 +19,7 @@ export default function App() {
       <Counter />
 
       {/* Name input */}
-      <NameInput />
+      <NameInput value = {name} onChange={setName}/>
 
 
 
