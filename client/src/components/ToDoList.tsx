@@ -5,17 +5,26 @@ type Todo = { id: number; text: string; done: boolean };
 export default function TodoList() {
   const [items, setItems] = useState<Todo[]>([]);
   const [text, setText] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   function addItem(e: React.FormEvent) {
     e.preventDefault();                 // stop page refresh
     if (!text.trim()) return;           // ignore empty
+    if(items.length >= 5){ // disable addItem when full
+      setDisabled(true);
+      return;
+    }
+    else{
+      setDisabled(false);
+    }  
     const newItem: Todo = {
       id: Date.now(),                   // simple unique id
       text: text.trim(),
       done: false,
     };
     setItems([...items, newItem]);      // create a new array (immutability)
-    setText("");                        // clear input
+    setText("");       
+               // clear input
   }
 
   function toggle(id: number) {
@@ -31,16 +40,18 @@ export default function TodoList() {
       <h2 className="text-xl font-semibold mb-3">Todo</h2>
 
       {/* Add form */}
-      <form onSubmit={addItem} className="flex items-center gap-2 mb-4">
+      <form onSubmit={addItem}  className="flex items-center gap-2 mb-4">
         <input
           className="border rounded p-2 text-black w-full max-w-sm"
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Add a task…"
         />
-        <button className="px-3 py-2 rounded bg-blue-600 text-white">
+        <button  className="px-3 py-2 rounded bg-blue-600 text-white">
           Add
         </button>
+        {disabled && <p className="text-red-950"> Limit Reached</p>}
+        
       </form>
 
       {/* List */}

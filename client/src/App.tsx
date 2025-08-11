@@ -9,22 +9,16 @@ export default function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [name, setName] = useState("")
 
-  return (
-    <div
-      className={`min-h-screen p-8 transition-colors ${
+return (
+    <div className={`justify-items-center min-h-screen p-8 transition-colors ${
         darkMode ? "bg-gray-900 text-white" : "bg-white text-black"
-      }`}
-    >
+      }`}>
       <h1 className="text-3xl font-bold mb-4">React Practice Playground</h1>
 
-      {/*COUNTER*/}
       <Counter />
+      <NameInput value={name} onChange={setName} />
+      <TodoList />
 
-      {/* Name input */}
-      <NameInput value = {name} onChange={setName}/>
-      <TodoList/>
-
-      {/* Dark mode toggle */}
       <div>
         <h2 className="text-xl font-semibold mb-2">Dark Mode</h2>
         <button
@@ -35,5 +29,5 @@ export default function App() {
         </button>
       </div>
     </div>
-  );
+)
 }
