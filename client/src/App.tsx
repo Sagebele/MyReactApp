@@ -1,33 +1,47 @@
 import { useState } from "react";
-import Counter from "./components/counter"
-import NameInput from "./components/NameInput";
 import TodoList from "./components/ToDoList";
+import TodoSummary from "./components/ToDoSummary";
 
+type Todo = { id: number; text: string; done: boolean };
 
 export default function App() {
-  // State for a "dark mode" toggle
-  const [darkMode, setDarkMode] = useState(false);
-  const [name, setName] = useState("")
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [dark, setDark] = useState(false);
 
-return (
-    <div className={`justify-items-center min-h-screen p-8 transition-colors ${
-        darkMode ? "bg-gray-900 text-white" : "bg-white text-black"
-      }`}>
-      <h1 className="text-3xl font-bold mb-4">React Practice Playground</h1>
+  function addTodo(text: string) {
+    const newTodo: Todo = { id: Date.now(), text, done: false };
+    setTodos(prev => [...prev, newTodo]);
+  }
 
-      <Counter />
-      <NameInput value={name} onChange={setName} />
-      <TodoList />
+  function toggleTodo(id: number) {
+    setTodos(prev =>
+      prev.map(t => t.id === id ? { ...t, done: !t.done } : t)
+    );
+  }
 
-      <div>
-        <h2 className="text-xl font-semibold mb-2">Dark Mode</h2>
+  function removeTodo(id: number) {
+    setTodos(prev => prev.filter(t => t.id !== id));
+  }
+
+  return (
+    <div className="p-4 ">
+      <div className="justify-items-center">
+        <h1 className="text-xl font-bold">My ToDooos</h1>
+
+        {/* Pass state and functions DOWN */}
+        <TodoList todos={todos} addTodo={addTodo} toggleTodo={toggleTodo} removeTodo={removeTodo} />
+
+        {/* Second component also gets the same todos */}
+        <TodoSummary todos={todos} />
+      </div>
+      <div className="absolute top-0 right-0 justify-content-center">
         <button
-          onClick={() => setDarkMode(!darkMode)}
-          className="bg-blue-500 px-4 py-2 rounded"
+        className= "dark:bg-black bg-black"
+        onClick= {()=>setDark(true)}
         >
-          {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          {dark?"darkmode":"lightmode"}
         </button>
       </div>
-    </div>
-)
+    </div>  
+  );
 }
