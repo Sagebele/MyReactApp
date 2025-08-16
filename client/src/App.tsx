@@ -1,9 +1,9 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useState } from "react";
 import Layout from "./components/Layout";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import TodosPage from "./components/ToDoPage";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import TodosPage from "./pages/ToDoPage";
 
 export type Todo = { id: number; title: string; done: boolean };
 
